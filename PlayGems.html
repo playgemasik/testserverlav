@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PlayGems</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css" />
+  <script src="https://kit.fontawesome.com/43e816a2c1.js" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at center, #3a0ca3, #10002b 70%);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    h2.title {
+      color: #b388ff;
+      text-shadow: 0 0 20px #8c46ff;
+      margin-top: 20px;
+    }
+
+    .buttons .button {
+      border-radius: 50px;
+      padding: 12px 25px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+    }
+
+    .button img {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #b388ff;
+      border-color: #b388ff;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 20px rgba(120, 50, 255, 0.3);
+      transform: scale(0.97);
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(160, 80, 255, 0.5);
+    }
+
+    .card-header {
+      background-color: rgba(0, 0, 0, 0.4);
+      color: #b388ff;
+      font-weight: bold;
+    }
+
+    .card-content {
+      color: #fff;
+    }
+
+    #cart-icon {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #b388ff;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    #cart-icon:hover {
+      transform: scale(1.15);
+      text-shadow: 0 0 15px #b388ff;
+    }
+
+    #cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: #ff00ff;
+      color: #fff;
+      border-radius: 50%;
+      padding: 2px 7px;
+      font-size: 12px;
+    }
+
+    #cart-panel {
+      position: fixed;
+      right: -400px;
+      top: 0;
+      width: 350px;
+      height: 100%;
+      background: rgba(40, 0, 80, 0.95);
+      box-shadow: -5px 0 25px rgba(160, 80, 255, 0.5);
+      border-left: 2px solid #b388ff;
+      transition: right 0.4s ease;
+      z-index: 999;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    #cart-panel.active {
+      right: 0;
+    }
+
+    .cart-item {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px rgba(120, 50, 255, 0.3);
+    }
+
+    .cart-item strong {
+      color: #b388ff;
+    }
+
+    .close-cart {
+      text-align: right;
+      font-size: 20px;
+      cursor: pointer;
+      color: #b388ff;
+    }
+
+    .pay-btn {
+      display: block;
+      width: 100%;
+      background: linear-gradient(90deg, #b388ff, #ff00ff);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 12px;
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(180, 100, 255, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    .pay-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
+    }
+
+    footer.footer {
+      background: rgba(0, 0, 0, 0.3);
+      color: #bbb;
+      padding: 25px 0;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="section has-text-centered">
+    <div class="container">
+      <h2 class="title is-2">💎 Товары</h2>
+
+      <div class="buttons is-centered">
+        <button class="button" onclick="showDepartment('telegram')">
+          <img src="2.png" alt="Телеграм" />
+          <span>Телеграм аккаунты</span>
+        </button>
+        <button class="button" onclick="showDepartment('gems')">
+          <img src="1.png" alt="Гемы" />
+          <span>Гемы</span>
+        </button>
+      </div>
+
+      <div id="telegram" class="department" style="display:none;">
+        <h3 class="title is-4">📱 Телеграм аккаунты</h3>
+        <div class="columns is-multiline is-centered">
+          <div class="column is-4">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">Тг Аккаунт +1 Новорег</p>
+              </header>
+              <div class="card-content">
+                <p><strong>Цена:</strong> 40₽</p>
+                <button class="button is-link is-light" onclick="addToCart('Тг Аккаунт +1 Новорег', 40)">Добавить в корзину</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="gems" class="department" style="display:none;">
+        <h3 class="title is-4">💎 Гемы</h3>
+        <div class="columns is-multiline is-centered">
+          <div class="column is-4">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">30 гемов</p>
+              </header>
+              <div class="card-content">
+                <p><strong>Цена:</strong> 200₽</p>
+                <button class="button is-link is-light" onclick="addToCart('30 гемов', 200)">Добавить в корзину</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-4">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">80 гемов</p>
+              </header>
+              <div class="card-content">
+                <p><strong>Цена:</strong> 40₽</p>
+                <button class="button is-link is-light" onclick="addToCart('80 гемов', 40)">Добавить в корзину</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cart-count">0</span>
+  </div>
+
+  <div id="cart-panel">
+    <div class="close-cart" onclick="toggleCart()">&times;</div>
+    <h3 class="title is-5">🛒 Ваша корзина</h3>
+    <div id="cart-items"></div>
+    <button class="pay-btn" onclick="checkout()">💳 Оплатить</button>
+  </div>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>SteelTeam RU &copy; 2025 | Все права защищены ⚙️</p>
+    </div>
+  </footer>
+
+  <script>
+    function showDepartment(id) {
+      document.querySelectorAll(".department").forEach((d) => (d.style.display = "none"));
+      document.getElementById(id).style.display = "block";
+    }
+
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      updateCartCount();
+      renderCartItems();
+    }
+
+    function updateCartCount() {
+      document.getElementById("cart-count").innerText = cart.length;
+    }
+
+    function renderCartItems() {
+      const container = document.getElementById("cart-items");
+      container.innerHTML = "";
+      cart.forEach((item) => {
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `<strong>${item.name}</strong><br>Цена: ${item.price}₽`;
+        container.appendChild(div);
+      });
+    }
+
+    const cartIcon = document.getElementById("cart-icon");
+    const cartPanel = document.getElementById("cart-panel");
+
+    cartIcon.addEventListener("click", toggleCart);
+
+    function toggleCart() {
+      cartPanel.classList.toggle("active");
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Корзина пуста!");
+        return;
+      }
+      const items = cart.map(i => `${i.name} (${i.price}₽)`).join(', ');
+      const message = encodeURIComponent(`Здравствуйте! Хочу оформить заказ: ${items}`);
+      // Здесь ссылка на вашего Telegram-бота
+      window.open(`http://t.me/Owbsgzyusbot?start=${message}`, '_blank');
+    }
+  </script>
+</body>
+</html>
+
